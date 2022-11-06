@@ -10,9 +10,14 @@ HARD mode - to select hard level
 
 how to undo?
 click on the UNDO button
+you can undo more than once!!
 
 cheat in your code?
-click on the CHEAT button
+1. click on the CHEAT button
+2. a text field will pop up asking which color ball you'll like to cheat on
+3. type the ball color
+4. press ok
+5. cheated!!
 
 ## Design Patterns
 
@@ -25,16 +30,23 @@ Participant classes:
 4. PoolGame/Observer/Observer
 5. PoolGame/Items/Game
 
+
 **Design Pattern 2 - Facade Pattern**
 
 Participant classes
-1.
+1. PoolGame/PoolTable
+2. PoolGame/Game
+3. PoolGame/App
+4. PoolGame/Config/PocketConfig
+5. PoolGame/Config/TableConfig
+6. PoolGame/Items/Pocket
+7. PoolGame/Items/CueStick
+8. PoolGame/PocketsConfig
 
-**Design Pattern 3 - Facade Pattern**
+**Design Pattern 3 - State Pattern**
 
 Participant classes
 1.
-
 
 **Extension 1 - Pockets and More Coloured Balls**
 
@@ -84,3 +96,7 @@ Participant classes
 6. PoolGame/Items/CueStick
 7. PoolGame/Game
 8. PoolGame/App
+
+**Extension 3 - Time and Score**
+
+**Extension 3 - Undo and Cheat**

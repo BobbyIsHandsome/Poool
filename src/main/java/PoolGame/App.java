@@ -51,8 +51,6 @@ public class App extends Application {
     private Group root;
     private Scene scene;
 
-    HashMap<String, Game> gameModes = new HashMap<>();
-
     private ConfigReader loadConfig(List<String> args, String configPath) {
        // String configPath;
         boolean isResourcesDir = false;
@@ -91,7 +89,7 @@ public class App extends Application {
         return config;
     }
 
-    public HBox addDisplayBox(){
+    private HBox addDisplayBox(){
         HBox hb = new HBox();
 
         countdown = 100;
@@ -124,7 +122,7 @@ public class App extends Application {
         return hb;
     }
 
-    public HBox addBtnHBox(){
+    private HBox addBtnHBox(){
         //buttons
         HBox hb = new HBox();
 
@@ -202,7 +200,7 @@ public class App extends Application {
         return hb;
     }
 
-    public Game getEasyGameMode(){
+    private Game getEasyGameMode(){
         //hard game mode set up
         ConfigReader easyConfig = loadConfig(getParameters().getRaw(), "/config_easy.json");
         Game easyGameMode = new Game(easyConfig);
@@ -210,7 +208,7 @@ public class App extends Application {
 
         return easyGameMode;
     }
-    public Game getNormalGameMode(){
+    private Game getNormalGameMode(){
         //hard game mode set up
         ConfigReader normalConfig = loadConfig(getParameters().getRaw(), "/config_normal.json");
         Game normalGameMode = new Game(normalConfig);
@@ -218,7 +216,7 @@ public class App extends Application {
 
         return normalGameMode;
     }
-    public Game getHardGameMode(){
+    private Game getHardGameMode(){
         //hard game mode set up
         ConfigReader hardConfig = loadConfig(getParameters().getRaw(), "/config_hard.json");
         Game hardGameMode = new Game(hardConfig);
