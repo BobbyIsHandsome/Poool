@@ -13,6 +13,7 @@ public class LoseState implements StateControl {
 
     @Override
     public void display() {
+
         text.setText("you lost");
 
     }

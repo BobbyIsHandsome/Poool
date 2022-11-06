@@ -17,6 +17,7 @@ public class WinState implements StateControl{
     }
     @Override
     public void display() {
+        text.setVisible(true);
         text.setText("Win and bye!");
     }
 }

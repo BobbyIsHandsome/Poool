@@ -62,6 +62,7 @@ public class Game {
 
         this.winText = new Label();
         this.winText.setFont(Font.font(50));
+        this.winText.setVisible(false);
 
     }
     public void resetConfig(ConfigReader config){
@@ -97,7 +98,7 @@ public class Game {
     public void addDrawables(Group root) {
         ObservableList<Node> groupChildren = root.getChildren();
         table.addToGroup(groupChildren);
-
+        this.winText.setVisible(false);
         groupChildren.add(this.winText);
     }
 
@@ -128,6 +129,7 @@ public class Game {
                 }
             }
         }
+        //winText.setVisible(false);
     }
     public void record(){
         boolean allStopped = true;
