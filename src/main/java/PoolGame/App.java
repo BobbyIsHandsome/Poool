@@ -66,7 +66,6 @@ public class App extends Application {
         // parse the file:
         ConfigReader config = null;
         try {
-            System.out.println("in try in app");
             config = new ConfigReader(configPath, isResourcesDir);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -99,8 +98,9 @@ public class App extends Application {
 
         //score display
         Label scoreTextDisplay = new Label();
-        scoreTextDisplay.setText("Score: 0");
+        scoreTextDisplay.setText("Score: ");
         Label score = new Label();
+        score.setText("0");
 
         //time display
         Label timeTextDisplay = new Label("Time: 0");
@@ -113,10 +113,12 @@ public class App extends Application {
 
         scoreTextDisplay.setFont(Font.font(20));
         timeTextDisplay.setFont(Font.font(20));
+        score.setFont(Font.font(20));
+        time.setFont(Font.font(20));
 
         hb.getChildren().addAll(scoreTextDisplay, score, timeTextDisplay, time);
 
-        hb.setPadding(new Insets(15, 12, 15, 12));
+        hb.setPadding(new Insets(95, 12, 15, 12));
         hb.setAlignment(Pos.CENTER);
 
         return hb;
@@ -179,6 +181,13 @@ public class App extends Application {
             }
         });
 
+        //setting font
+        cheatBtn.setFont(Font.font(15));
+        undoBtn.setFont(Font.font(15));
+        easyGameMode.setFont(Font.font(15));
+        normalGameMode.setFont(Font.font(15));
+        hardGameMode.setFont(Font.font(15));
+
         //add button the hbox
         hb.getChildren().addAll(cheatBtn, undoBtn, easyGameMode, normalGameMode, hardGameMode);
 
@@ -187,25 +196,6 @@ public class App extends Application {
         return hb;
     }
 
-//    public Game getGameMode(){
-//
-//        //easy game mode set up
-//        ConfigReader easyConfig = loadConfig(getParameters().getRaw(), "/config_easy.json");
-//        Game easyGameMode = new Game(easyConfig);
-//        gameModes.put("easy", easyGameMode);
-//
-//        //normal game mode set up
-//        ConfigReader normalConfig = loadConfig(getParameters().getRaw(), "/config_normal.json");
-//        Game normalGameMode = new Game(normalConfig);
-//        gameModes.put("normal", normalGameMode);
-//
-//        //hard game mode set up
-//        ConfigReader hardConfig = loadConfig(getParameters().getRaw(), "/config_hard.json");
-//        Game hardGameMode = new Game(hardConfig);
-//        gameModes.put("hard", hardGameMode);
-//
-//        return easyGameMode;
-//    }
     public Game getEasyGameMode(){
         //hard game mode set up
         ConfigReader easyConfig = loadConfig(getParameters().getRaw(), "/config_easy.json");
@@ -234,7 +224,7 @@ public class App extends Application {
         //canvas for pool table
         Canvas canvas = new Canvas(game.getWindowDimX(), game.getWindowDimY());
         GraphicsContext gc = canvas.getGraphicsContext2D();
-//        vbox.getChildren().removeAll();
+
         vbox.getChildren().add(canvas);
         vbox.getChildren().add(addDisplayBox());
         vbox.getChildren().add(addBtnHBox());
@@ -267,12 +257,11 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
 
-//        game = getGameMode();
         game = getEasyGameMode();
         setup(game);
 
-        stage.setWidth(game.getWindowDimX());
-        stage.setHeight(vbox.getMinHeight());
+        stage.setWidth(game.getWindowDimX() + 140);
+        stage.setHeight(vbox.getMaxHeight());
 
         run();
 
@@ -295,7 +284,6 @@ public class App extends Application {
      * @param args CLI arguments
      */
     public static void main(String[] args) {
-        System.out.println(12345);
         launch(args);
     }
 }

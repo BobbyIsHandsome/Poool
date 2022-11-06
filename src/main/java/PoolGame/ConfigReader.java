@@ -71,8 +71,6 @@ public class ConfigReader {
 		JSONObject jsonConfig = this.readFile();
 		ConfigFactoryRegistry registry = new ConfigFactoryRegistry();
 		registry.registerDefault();
-		System.out.println("here in parse() in ConfigReader");
-
 		String requiredKeys[] = {"Table", "Balls"};
 		checkRequiredKey(jsonConfig, requiredKeys);
 
@@ -90,7 +88,6 @@ public class ConfigReader {
 
 	private void checkRequiredKey(JSONObject jsonObj, String[] keys) throws ConfigKeyMissingException {
 		for (String key : keys) {
-			System.out.println("key: " + key + "\njsonObj: " + jsonObj.toJSONString() );
 			if (!jsonObj.containsKey(key)) {
 				throw new ConfigKeyMissingException(String.format("Key \"%s\" missing.", key));
 			}

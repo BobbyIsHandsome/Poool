@@ -119,7 +119,6 @@ public class Game {
             ball.move();
 
             if (ball.getBallType() == Ball.BallType.CUEBALL && attached == false) {
-                System.out.println("attaching observer " + ball.getCueStickObject());
                 ball.attachObserver(ball.getCueStickObject());
                 attached = true;
             }
