@@ -146,6 +146,7 @@ public class Game {
         this.table.removeBall(color, this);
     }
     public void setScoreLabel(Label score){
+
         this.score = score;
     }
     public void addScore(int score){

@@ -50,8 +50,10 @@ public class App extends Application {
     private VBox vbox;
     private Group root;
     private Scene scene;
-
-
+    Timeline timeline;
+    HBox hb1;
+    HBox hb2;
+    Timeline timer;
     private ConfigReader loadConfig(List<String> args, String configPath) {
        // String configPath;
         boolean isResourcesDir = false;
@@ -94,7 +96,7 @@ public class App extends Application {
         return countdown;
     }
     private HBox addDisplayBox(){
-        HBox hb = new HBox();
+        hb1 = new HBox();
 
         countdown = 0;
 
@@ -102,6 +104,7 @@ public class App extends Application {
         Label scoreTextDisplay = new Label();
         scoreTextDisplay.setText("Score: ");
         Label score = new Label();
+        System.out.println("again");
         score.setText("0");
         game.setScoreLabel(score);
         //time display
@@ -109,7 +112,7 @@ public class App extends Application {
         Label time = new Label();
 
         //timer
-        Timeline timer= new Timeline(new KeyFrame(Duration.millis(1000), e -> timeTextDisplay.setText("Time: "+ countingtime())));
+        timer= new Timeline(new KeyFrame(Duration.millis(1000), e -> timeTextDisplay.setText("Time: "+ countingtime())));
         timer.setCycleCount(Timeline.INDEFINITE);
         timer.play();
 
@@ -118,17 +121,17 @@ public class App extends Application {
         score.setFont(Font.font(20));
         time.setFont(Font.font(20));
 
-        hb.getChildren().addAll(scoreTextDisplay, score, timeTextDisplay, time);
+        hb1.getChildren().addAll(scoreTextDisplay, score, timeTextDisplay, time);
 
-        hb.setPadding(new Insets(95, 12, 15, 12));
-        hb.setAlignment(Pos.CENTER);
+        hb1.setPadding(new Insets(95, 12, 15, 12));
+        hb1.setAlignment(Pos.CENTER);
 
-        return hb;
+        return hb1;
     }
 
     private HBox addBtnHBox(){
         //buttons
-        HBox hb = new HBox();
+        hb2 = new HBox();
 
         //cheat button
         Button cheatBtn = new Button("Cheat");
@@ -157,7 +160,6 @@ public class App extends Application {
         easyGameMode.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-//                game =  gameModes.get("easy");
                 game = getEasyGameMode();
 //                setup(game);
                 reset(game);
@@ -199,11 +201,11 @@ public class App extends Application {
         hardGameMode.setFont(Font.font(15));
 
         //add button the hbox
-        hb.getChildren().addAll(cheatBtn, undoBtn, easyGameMode, normalGameMode, hardGameMode);
+        hb2.getChildren().addAll(cheatBtn, undoBtn, easyGameMode, normalGameMode, hardGameMode);
 
-        hb.setPadding(new Insets(15, 12, 15, 12));
-        hb.setAlignment(Pos.CENTER);
-        return hb;
+        hb2.setPadding(new Insets(15, 12, 15, 12));
+        hb2.setAlignment(Pos.CENTER);
+        return hb2;
     }
 
     private Game getEasyGameMode(){
@@ -238,21 +240,23 @@ public class App extends Application {
         vbox.getChildren().add(canvas);
         vbox.getChildren().add(addDisplayBox());
         vbox.getChildren().add(addBtnHBox());
-
         game.addDrawables(root);
 
         run();
 
     }
     private void reset(Game game){
+        timer.stop();
         Canvas canvas = new Canvas(game.getWindowDimX(), game.getWindowDimY());
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        vbox.getChildren().removeAll();
+        hb1.getChildren().clear();
+        hb2.getChildren().clear();
+        vbox.getChildren().clear();
         vbox.getChildren().add(canvas);
         vbox.getChildren().add(addDisplayBox());
         vbox.getChildren().add(addBtnHBox());
-
         game.addDrawables(root);
+//        run();
     }
 
     @Override
@@ -273,12 +277,12 @@ public class App extends Application {
         stage.setWidth(game.getWindowDimX() + 140);
         stage.setHeight(vbox.getMaxHeight());
 
-        run();
+//        run();
 
     }
 
     void run(){
-        Timeline timeline = new Timeline();
+        timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         KeyFrame frame = new KeyFrame(Duration.seconds(FRAMETIME),
                 (actionEvent) -> {
