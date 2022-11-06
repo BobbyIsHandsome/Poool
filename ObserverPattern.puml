@@ -1,0 +1,106 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class Ball {
+- List<Observer> observers
+~ {static} double RADIUS
+- double HIT_FORCE_MULTIPLIER
+- double MIN_VEL
+- double MAX_HIT_FORCE_MAG
+- double[] originalPos
+- double[] originalVel
+- double[] vel
+- double mass
+- Color colour
+- Circle shape
+- Line cueStick
+- CueStick cueObj
+- BallType type
+- BallPocketStrategy pocketAction
+- boolean disabled
+- int fallCounter
+~ int cueLength
++ void attachObserver(Observer)
++ void detachObserver(Observer)
++ void notifyObservers()
++ CueStick getCueStickObject()
++ double getRadius()
++ double getXPos()
++ double getYPos()
++ double getXVel()
++ double getYVel()
++ double getMass()
++ BallType getBallType()
++ Node getNode()
++ Bounds getLocalBounds()
++ BallPocketStrategy getPocketAction()
++ int getFallCounter()
++ boolean isDisabled()
++ boolean hasStopped()
++ void addToGroup(ObservableList<Node>)
++ void setXVel(double)
++ void setYVel(double)
++ void setColour(String)
++ void setInitialXPos(double)
++ void setInitialYPos(double)
++ void setXPos(double)
++ void setYPos(double)
++ void setInitialXVel(double)
++ void setInitialYVel(double)
++ void setPocketAction(BallPocketStrategy)
++ void setMass(double)
++ void setBallType(BallType)
++ void incrementFallCounter()
++ void disable()
++ void resetPosition()
++ void resetVelocity()
++ void reset()
++ void registerCueBallMouseAction()
++ boolean isColliding(Ball)
+- Point2D calculateCueBallVelOnHit(double,double)
++ void handleCollision(Ball)
++ void applyFriction(double)
++ void move()
++ void fallIntoPocket(Game)
+}
+enum BallType {
++  CUEBALL
++  NORMALBALL
+}
+class CueStick {
+~ Ball ball
+~ Line cueStick
++ Line getCueStick()
++ void update()
+}
+class Game {
+- PoolTable table
+- boolean shownWonText
+- Text winText
+- boolean attached
+- void setup(ConfigReader)
++ double getWindowDimX()
++ double getWindowDimY()
++ PoolTable getPoolTable()
++ void addDrawables(Group)
++ void reset()
++ void tick()
+}
+interface Observer {
++ void update()
+}
+interface Subject {
++ void attachObserver(Observer)
++ void detachObserver(Observer)
++ void notifyObservers()
+}
+
+Ball --> CueStick
+Subject --> Observer : ObserverList
+Subject <|.. Ball
+Observer <|.. CueStick
+Drawable <|.. Ball
+Movable <|.. Ball
+
+@enduml

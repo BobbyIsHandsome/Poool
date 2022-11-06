@@ -1,0 +1,179 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class BallBuilderDirector {
+- Map<String,BallBuilder> builders
++ <<Create>> BallBuilderDirector()
++ void register(String,BallBuilder)
++ void registerDefault()
++ Ball construct(BallConfig)
+}
+class OrangeBallBuilder {
+- Ball ball
+- BallType ballType
+- BallPocketStrategy action
++ <<Create>> OrangeBallBuilder()
++ <<Create>> OrangeBallBuilder(BallType,BallPocketStrategy)
++ void reset()
++ void setXPos(double)
++ void setYPos(double)
++ void setXVel(double)
++ void setYVel(double)
++ void setMass(double)
++ void setBallType(BallType)
++ void setPocketAction(BallPocketStrategy)
++ Ball finaliseBuild()
+}
+class BlueBallBuilder {
+- Ball ball
+- BallType ballType
+- BallPocketStrategy action
++ <<Create>> BlueBallBuilder()
++ <<Create>> BlueBallBuilder(BallType,BallPocketStrategy)
++ void reset()
++ void setXPos(double)
++ void setYPos(double)
++ void setXVel(double)
++ void setYVel(double)
++ void setMass(double)
++ void setBallType(BallType)
++ void setPocketAction(BallPocketStrategy)
++ Ball finaliseBuild()
+}
+class RedBallBuilder {
+- Ball ball
+- BallType ballType
+- BallPocketStrategy action
++ <<Create>> RedBallBuilder()
++ <<Create>> RedBallBuilder(BallType,BallPocketStrategy)
++ void reset()
++ void setXPos(double)
++ void setYPos(double)
++ void setXVel(double)
++ void setYVel(double)
++ void setMass(double)
++ void setBallType(BallType)
++ void setPocketAction(BallPocketStrategy)
++ Ball finaliseBuild()
+}
+class YellowBallBuilder {
+- Ball ball
+- BallType ballType
+- BallPocketStrategy action
++ <<Create>> YellowBallBuilder()
++ <<Create>> YellowBallBuilder(BallType,BallPocketStrategy)
++ void reset()
++ void setXPos(double)
++ void setYPos(double)
++ void setXVel(double)
++ void setYVel(double)
++ void setMass(double)
++ void setBallType(BallType)
++ void setPocketAction(BallPocketStrategy)
++ Ball finaliseBuild()
+}
+class PurpleBallBuilder {
+- Ball ball
+- BallType ballType
+- BallPocketStrategy action
++ <<Create>> PurpleBallBuilder()
++ <<Create>> PurpleBallBuilder(BallType,BallPocketStrategy)
++ void reset()
++ void setXPos(double)
++ void setYPos(double)
++ void setXVel(double)
++ void setYVel(double)
++ void setMass(double)
++ void setBallType(BallType)
++ void setPocketAction(BallPocketStrategy)
++ Ball finaliseBuild()
+}
+interface BallBuilder {
++ void reset()
++ void setXPos(double)
++ void setYPos(double)
++ void setXVel(double)
++ void setYVel(double)
++ void setMass(double)
++ void setBallType(BallType)
++ void setPocketAction(BallPocketStrategy)
++ Ball finaliseBuild()
+}
+class BlackBallBuilder {
+- Ball ball
+- Ball.BallType ballType
+- BallPocketStrategy action
++ <<Create>> BlackBallBuilder()
++ <<Create>> BlackBallBuilder(Ball.BallType,BallPocketStrategy)
++ void reset()
++ void setXPos(double)
++ void setYPos(double)
++ void setXVel(double)
++ void setYVel(double)
++ void setMass(double)
++ void setBallType(Ball.BallType)
++ void setPocketAction(BallPocketStrategy)
++ Ball finaliseBuild()
+}
+class GreenBallBuilder {
+- Ball ball
+- BallType ballType
+- BallPocketStrategy action
++ <<Create>> GreenBallBuilder()
++ <<Create>> GreenBallBuilder(BallType,BallPocketStrategy)
++ void reset()
++ void setXPos(double)
++ void setYPos(double)
++ void setXVel(double)
++ void setYVel(double)
++ void setMass(double)
++ void setBallType(BallType)
++ void setPocketAction(BallPocketStrategy)
++ Ball finaliseBuild()
+}
+class BrownBallBuilder {
+- Ball ball
+- Ball.BallType ballType
+- BallPocketStrategy action
++ <<Create>> BrownBallBuilder()
++ <<Create>> BrownBallBuilder(Ball.BallType,BallPocketStrategy)
++ void reset()
++ void setXPos(double)
++ void setYPos(double)
++ void setXVel(double)
++ void setYVel(double)
++ void setMass(double)
++ void setBallType(Ball.BallType)
++ void setPocketAction(BallPocketStrategy)
++ Ball finaliseBuild()
+}
+class WhiteBallBuilder {
+- Ball ball
+- BallType ballType
+- BallPocketStrategy action
++ <<Create>> WhiteBallBuilder()
++ <<Create>> WhiteBallBuilder(BallType,BallPocketStrategy)
++ void reset()
++ void setXPos(double)
++ void setYPos(double)
++ void setXVel(double)
++ void setYVel(double)
++ void setMass(double)
++ void setBallType(BallType)
++ void setPocketAction(BallPocketStrategy)
++ Ball finaliseBuild()
+}
+
+
+BallBuilder <|.. OrangeBallBuilder
+BallBuilder <|.. BlueBallBuilder
+BallBuilder <|.. RedBallBuilder
+BallBuilder <|.. YellowBallBuilder
+BallBuilder <|.. PurpleBallBuilder
+BallBuilder <|.. BlackBallBuilder
+BallBuilder <|.. GreenBallBuilder
+BallBuilder <|.. BrownBallBuilder
+BallBuilder <|.. WhiteBallBuilder
+
+@enduml
