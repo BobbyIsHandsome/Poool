@@ -46,7 +46,10 @@ Participant classes
 **Design Pattern 3 - State Pattern**
 
 Participant classes
-1.
+1.PoolGame/State/WinState
+2.PoolGame/State/LoseState
+3.PoolGame/State/StateControl
+4.1.PoolGame/Game
 
 **Extension 1 - Pockets and More Coloured Balls**
 
@@ -99,4 +102,4 @@ Participant classes
 
 **Extension 3 - Time and Score**
 
-**Extension 3 - Undo and Cheat**
+**Extension 4 - Undo and Cheat**

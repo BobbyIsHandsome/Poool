@@ -10,21 +10,29 @@ import PoolGame.Config.PocketsConfig;
 import PoolGame.Items.Ball;
 import PoolGame.Items.Pocket;
 import PoolGame.Items.PoolTable;
+import PoolGame.State.LoseState;
+import PoolGame.State.StateControl;
+import PoolGame.State.WinState;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /** The game class that runs the game */
 public class Game {
 
     private PoolTable table;
-    private boolean shownWonText = false;
-    private final Text winText = new Text(50, 50, "Win and Bye");
+   // private boolean shownWonText = false;
+    //private final Text winText = new Text(50, 50, "Win and Bye");
     private boolean attached = false;
     Label score;
+
+    //display win message
+    Label winText;
+    StateControl gameState;
     /**
      * Initialise the game with the provided config
      * @param config The config parser to load the config from
@@ -50,19 +58,11 @@ public class Game {
             }
         }
 
-//        List<PocketConfig> pocketsConf = config.getConfig().getPocketsConfig().getPocketConfigs();
-//        List<Pocket> pockets = new ArrayList<>();
-//        for (PocketConfig pocketConfi: pocketsConf){
-//            Pocket pocket = new Pocket(pocketConfi.getPositionConfig().getX(), pocketConfi.getPositionConfig().getY());
-//            pockets.add(pocket);
-//            System.out.println("pocket added "+ pocket);
-//        }
-
-
         this.table.setupBalls(balls);
-        this.winText.setVisible(false);
-        this.winText.setX(table.getDimX() / 2);
-        this.winText.setY(table.getDimY() / 2);
+
+        this.winText = new Label();
+        this.winText.setFont(Font.font(50));
+
     }
     public void resetConfig(ConfigReader config){
         this.setup(config);
@@ -97,22 +97,20 @@ public class Game {
     public void addDrawables(Group root) {
         ObservableList<Node> groupChildren = root.getChildren();
         table.addToGroup(groupChildren);
+
         groupChildren.add(this.winText);
     }
 
     /** Reset the game */
     public void reset() {
-        this.winText.setVisible(false);
-        this.shownWonText = false;
         this.table.reset();
     }
 
     /** Code to execute every tick. */
     public void tick() {
-        if (table.hasWon() && !this.shownWonText) {
-            System.out.println(this.winText.getText());
-            this.winText.setVisible(true);
-            this.shownWonText = true;
+        if (table.hasWon()) {
+            gameState = new WinState(this.winText);
+            gameState.display();
         }
         table.checkPocket(this);
         table.handleCollision();
@@ -151,7 +149,6 @@ public class Game {
     }
     public void addScore(int score){
         int currentScore = Integer.parseInt(this.score.getText());
-        System.out.println(currentScore);
         this.score.setText(String.valueOf(currentScore+score));
     }
 }
