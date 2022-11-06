@@ -295,6 +295,7 @@ public class App extends Application {
      * @param args CLI arguments
      */
     public static void main(String[] args) {
+        System.out.println(12345);
         launch(args);
     }
 }
