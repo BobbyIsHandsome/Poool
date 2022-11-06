@@ -14,10 +14,13 @@ public class WinState implements StateControl{
 
     public WinState(Label text){
         this.text = text;
+
     }
     @Override
     public void display() {
         text.setVisible(true);
         text.setText("Win and bye!");
+
     }
+
 }

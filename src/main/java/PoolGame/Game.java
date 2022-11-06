@@ -12,6 +12,7 @@ import PoolGame.Items.Pocket;
 import PoolGame.Items.PoolTable;
 import PoolGame.State.LoseState;
 import PoolGame.State.StateControl;
+import PoolGame.State.TransitionState;
 import PoolGame.State.WinState;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -63,6 +64,8 @@ public class Game {
         this.winText = new Label();
         this.winText.setFont(Font.font(50));
         this.winText.setVisible(false);
+        setState(new TransitionState(this.winText));
+
 
     }
     public void resetConfig(ConfigReader config){
@@ -105,14 +108,25 @@ public class Game {
     /** Reset the game */
     public void reset() {
         this.table.reset();
+        setState(new TransitionState(this.winText));
+    }
+
+    public StateControl getState(){
+        return gameState;
+    }
+
+    public void setState(StateControl gameState){
+        this.gameState = gameState;
+        //gameState = new WinState(this.winText);
     }
 
     /** Code to execute every tick. */
     public void tick() {
         if (table.hasWon()) {
-            gameState = new WinState(this.winText);
-            gameState.display();
+            setState(new WinState(this.winText));
+            getState().display();
         }
+
         table.checkPocket(this);
         table.handleCollision();
         this.table.applyFrictionToBalls();
@@ -129,6 +143,7 @@ public class Game {
                 }
             }
         }
+        //setState(new TransitionState(this.winText));
         //winText.setVisible(false);
     }
     public void record(){
