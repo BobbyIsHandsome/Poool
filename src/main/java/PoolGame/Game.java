@@ -13,6 +13,7 @@ import PoolGame.Items.PoolTable;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -23,6 +24,7 @@ public class Game {
     private boolean shownWonText = false;
     private final Text winText = new Text(50, 50, "Win and Bye");
     private boolean attached = false;
+    Label score;
     /**
      * Initialise the game with the provided config
      * @param config The config parser to load the config from
@@ -141,6 +143,14 @@ public class Game {
         }
     }
     public void removeBall(String color){
-        this.table.removeBall(color);
+        this.table.removeBall(color, this);
+    }
+    public void setScoreLabel(Label score){
+        this.score = score;
+    }
+    public void addScore(int score){
+        int currentScore = Integer.parseInt(this.score.getText());
+        System.out.println(currentScore);
+        this.score.setText(String.valueOf(currentScore+score));
     }
 }

@@ -51,6 +51,7 @@ public class App extends Application {
     private Group root;
     private Scene scene;
 
+
     private ConfigReader loadConfig(List<String> args, String configPath) {
        // String configPath;
         boolean isResourcesDir = false;
@@ -88,24 +89,27 @@ public class App extends Application {
         }
         return config;
     }
-
+    public int countingtime(){
+        countdown ++;
+        return countdown;
+    }
     private HBox addDisplayBox(){
         HBox hb = new HBox();
 
-        countdown = 100;
+        countdown = 0;
 
         //score display
         Label scoreTextDisplay = new Label();
         scoreTextDisplay.setText("Score: ");
         Label score = new Label();
         score.setText("0");
-
+        game.setScoreLabel(score);
         //time display
         Label timeTextDisplay = new Label("Time: 0");
         Label time = new Label();
 
         //timer
-        Timeline timer= new Timeline(new KeyFrame(Duration.millis(1000), e -> timeTextDisplay.setText("Time: "+ countdown--)));
+        Timeline timer= new Timeline(new KeyFrame(Duration.millis(1000), e -> timeTextDisplay.setText("Time: "+ countingtime())));
         timer.setCycleCount(Timeline.INDEFINITE);
         timer.play();
 
@@ -168,6 +172,7 @@ public class App extends Application {
 //                game = gameModes.get("normal");
                 game = getNormalGameMode();
 //                setup(game);
+
                 reset(game);
             }
         });
@@ -181,6 +186,7 @@ public class App extends Application {
 //                game = gameModes.get("hard");
                 game = getHardGameMode();
 //                setup(game);
+
                 reset(game);
             }
         });

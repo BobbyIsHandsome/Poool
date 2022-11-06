@@ -203,9 +203,32 @@ public class PoolTable implements Drawable {
                 Point2D ballCenter = new Point2D(ball.getXPos(), ball.getYPos());
                 if (pocket.isInPocket(ballCenter)) {
                     ball.fallIntoPocket(game);
+
+                    game.addScore(getScore(ball));
                 }
             }
         }
+    }
+    public int getScore(Ball ball){
+        if(ball.getColour().equals(Color.valueOf("red"))){
+            System.out.println("one is falled");
+            return 1;
+        } else if (ball.getColour().equals(Color.valueOf("yellow"))) {
+            return 2;
+        } else if (ball.getColour().equals(Color.valueOf("green"))) {
+            return 3;
+        }else if (ball.getColour().equals(Color.valueOf("brown"))) {
+            return 4;
+        }else if (ball.getColour().equals(Color.valueOf("blue"))) {
+            return 5;
+        }else if (ball.getColour().equals(Color.valueOf("purple"))) {
+            return 6;
+        }else if (ball.getColour().equals(Color.valueOf("black"))) {
+            return 7;
+        }else if (ball.getColour().equals(Color.valueOf("orange"))) {
+            return 8;
+        }
+        return 0;
     }
 
     /**
@@ -277,17 +300,19 @@ public class PoolTable implements Drawable {
         }
     }
 
-    public void removeBall(String color){
+    public void removeBall(String color,Game game){
         Color realColor = Color.valueOf(color);
-        Ball removeBall = null;
+//        Ball removeBall = null;
         for(Ball ball : this.balls){
             if(ball.getColour().equals(realColor)){
                 //System.out.println(ball.getColour() + " "+realColor);
-                removeBall = ball;
+//                removeBall = ball;
+                ball.fallIntoPocket(game);
+                game.addScore(getScore(ball));
             }
         }
-        removeBall.disable();
-        this.balls.remove(removeBall);
+//        removeBall.disable();
+//        this.balls.remove(removeBall);
 
     }
 }
