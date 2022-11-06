@@ -23,6 +23,7 @@ import java.util.List;
 public class Ball implements Drawable, Movable, Subject {
 
     private List<Observer> observers;
+    private boolean recorded = false;
 
     /* adds an observer to the list
      */
@@ -85,7 +86,7 @@ public class Ball implements Drawable, Movable, Subject {
     private BallPocketStrategy pocketAction;
     private boolean disabled = false;
     private int fallCounter = 0;
-
+    ArrayList<double[]> positions;
     int cueLength = 60;
 
     /**
@@ -102,12 +103,11 @@ public class Ball implements Drawable, Movable, Subject {
      * @throws IllegalArgumentException One of the provided value is invalid
      */
     public Ball(String colour, double xPos, double yPos, double xVel, double yVel, double mass, BallType type, BallPocketStrategy pocketAction) throws IllegalArgumentException {
+        positions = new ArrayList<>();
         this.shape = new Circle(this.originalPos[0], this.originalPos[1], RADIUS);
-
         cueObj = new CueStick(this);
         this.cueStick = cueObj.getCueStick();
         this.cueStick.setVisible(false);
-
         this.setColour(colour);
         this.setXPos(xPos);
         this.setYPos(yPos);
@@ -118,8 +118,9 @@ public class Ball implements Drawable, Movable, Subject {
         this.setMass(mass);
         this.setBallType(type);
         this.setPocketAction(pocketAction);
-
+        this.recorded = false;
         this.observers = new ArrayList<>();
+        this.positions.add(new double[]{xPos, yPos});
     }
 
     /*
@@ -134,12 +135,14 @@ public class Ball implements Drawable, Movable, Subject {
      * values
      */
     public Ball() {
+        positions = new ArrayList<>();
         this.shape = new Circle(this.originalPos[0], this.originalPos[1], RADIUS);
         this.cueObj = new CueStick(this);
         this.cueStick = cueObj.getCueStick();
         this.cueStick.setVisible(false);
-
+        this.recorded = false;
         this.observers = new ArrayList<>();
+        this.positions.add(new double[]{this.originalPos[0], this.originalPos[1]});
     }
 
     /**
@@ -602,5 +605,30 @@ public class Ball implements Drawable, Movable, Subject {
      */
     public Color getColour(){
         return this.colour;
+    }
+    public boolean recordUndo(){
+        if (!hasStopped() && !recorded){
+            recorded = true;
+            return true;
+        } else if (hasStopped() && recorded) {
+            recorded = false;
+            return false;
+        }
+        return false;
+    }
+    public void recordPosition(){
+        this.positions.add(new double[]{getXPos(), getYPos()});
+    }
+    public void unDo(){
+        if(this.positions.size() == 1){
+            return;
+        }
+        double[] pos = this.positions.get(this.positions.size()-1);
+        setXPos(pos[0]);
+        setYPos(pos[1]);
+        setXVel(0);
+        setYVel(0);
+        this.positions.remove(this.positions.size()-1);
+
     }
 }

@@ -117,14 +117,29 @@ public class Game {
         this.table.applyFrictionToBalls();
         for (Ball ball : this.table.getBalls()) {
             ball.move();
-
             if (ball.getBallType() == Ball.BallType.CUEBALL && attached == false) {
                 ball.attachObserver(ball.getCueStickObject());
                 attached = true;
             }
+            if(ball.getBallType() == Ball.BallType.CUEBALL){
+                boolean status = ball.recordUndo();
+                if(status){
+                    record();
+                }
+            }
         }
     }
-
+    public void record(){
+        boolean allStopped = true;
+        for (Ball ball : this.table.getBalls()) {
+                ball.recordPosition();
+        }
+    }
+    public void undo(){
+        for (Ball ball : this.table.getBalls()) {
+            ball.unDo();
+        }
+    }
     public void removeBall(String color){
         this.table.removeBall(color);
     }

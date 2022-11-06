@@ -146,6 +146,12 @@ public class App extends Application {
 
         //easy game mode
         Button easyGameMode = new Button("EASY mode");
+        undoBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                game.undo();
+            }
+        });
         easyGameMode.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
