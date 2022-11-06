@@ -631,4 +631,7 @@ public class Ball implements Drawable, Movable, Subject {
         this.positions.remove(this.positions.size()-1);
 
     }
+    public boolean isVisible(){
+        return !this.disabled;
+    }
 }

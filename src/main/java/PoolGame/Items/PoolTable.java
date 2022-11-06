@@ -304,7 +304,7 @@ public class PoolTable implements Drawable {
         Color realColor = Color.valueOf(color);
 //        Ball removeBall = null;
         for(Ball ball : this.balls){
-            if(ball.getColour().equals(realColor)){
+            if(ball.getColour().equals(realColor) && ball.isVisible()){
                 //System.out.println(ball.getColour() + " "+realColor);
 //                removeBall = ball;
                 ball.fallIntoPocket(game);
